@@ -13,9 +13,9 @@ public struct Wallet has key, store {
     token: Token
 }
 
-public fun create_wallet(ctx: &mut TxContext, token_name: String): Wallet {
+public fun create_wallet(ctx: &mut TxContext): Wallet {
     let token = Token{
-        name: token_name,
+        name: b"Test Token".to_string(),
         balance: 0
     };
 

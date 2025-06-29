@@ -12,10 +12,9 @@ const E_WITHDRAW_FAILED: u64 = 1;
 #[test]
 fun test_wallet_creation() {
     let test_address = @0x1;
-    let test_token_name = b"TestToken".to_string();
 
     let mut scenario = test_scenario::begin(test_address);
-    let wallet: Wallet = wallet::create_wallet(scenario.ctx(), test_token_name);
+    let wallet: Wallet = wallet::create_wallet(scenario.ctx());
 
     let owner_address = wallet::get_owner_address(&wallet);
     let token_name = wallet::get_token_name(&wallet);
@@ -37,11 +36,10 @@ fun test_wallet_creation() {
 #[test]
 fun test_wallet_deposit(){
     let test_address = @0x1;
-    let test_token_name = b"Test Token".to_string();
 
     let mut scenario = test_scenario::begin(test_address);
 
-    let mut wallet: Wallet = wallet::create_wallet(scenario.ctx(), test_token_name);
+    let mut wallet: Wallet = wallet::create_wallet(scenario.ctx());
     let deposit_amount = 100;
 
     wallet::deposit(&mut wallet, deposit_amount);
@@ -57,11 +55,10 @@ fun test_wallet_deposit(){
 #[test]
 fun test_wallet_withdraw() {
     let test_address = @0x1;
-    let test_token_name = b"Test Token".to_string();
 
     let mut scenario = test_scenario::begin(test_address);
 
-    let mut wallet: Wallet = wallet::create_wallet(scenario.ctx(), test_token_name);
+    let mut wallet: Wallet = wallet::create_wallet(scenario.ctx());
     let deposit_amount = 100;
 
     wallet::deposit(&mut wallet, deposit_amount);
@@ -85,10 +82,9 @@ fun test_wallet_withdraw() {
 #[test]
 fun test_wallet_withdraw_insufficient_funds() {
     let test_address = @0x1;
-    let test_token_name = b"Test Token".to_string();  
 
     let mut scenario = test_scenario::begin(test_address);
-    let mut wallet: Wallet = wallet::create_wallet(scenario.ctx(), test_token_name);
+    let mut wallet: Wallet = wallet::create_wallet(scenario.ctx());
     let deposit_amount = 100;
 
     wallet::deposit(&mut wallet, deposit_amount);
@@ -111,10 +107,9 @@ fun test_wallet_withdraw_insufficient_funds() {
 #[test]
 fun test_wallet_deletion() {
     let test_address = @0x1;
-    let test_token_name = b"Test Token".to_string();
 
     let mut scenario = test_scenario::begin(test_address);
-    let wallet: Wallet = wallet::create_wallet(scenario.ctx(), test_token_name);
+    let wallet: Wallet = wallet::create_wallet(scenario.ctx());
 
     wallet::delete_wallet(wallet);
     debug::print(&b"Wallet deleted successfully".to_string());
